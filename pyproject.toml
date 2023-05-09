@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mod"
+name = "GEO_MOD"
 version = "0.1.0"
 description = ""
 authors = ["SizNi <wwwwwwwww@list.ru>"]
@@ -10,6 +10,8 @@ python = "^3.8"
 matplotlib = "^3.7.1"
 pandas = "^2.0.1"
 black = "^23.3.0"
+imod = "^0.13.1"
+pysgems = "^1.2.3"
 
 
 [build-system]
