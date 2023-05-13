@@ -11,8 +11,11 @@ matplotlib = "^3.7.1"
 pandas = "^2.0.1"
 black = "^23.3.0"
 imod = "^0.13.1"
-pysgems = "^1.2.3"
+seaborn = "^0.12.2"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.23.0"
 
 [build-system]
 requires = ["poetry-core"]
