@@ -12,6 +12,9 @@ pandas = "^2.0.1"
 black = "^23.3.0"
 imod = "^0.13.1"
 seaborn = "^0.12.2"
+fortran-language-server = "^1.12.0"
+findent = "^4.2.6"
+fprettify = "^0.3.7"
 
 
 [tool.poetry.group.dev.dependencies]

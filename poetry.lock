@@ -376,6 +376,22 @@ test = ["pytest"]
 typing = ["mypy (>=0.990)"]
 
 [[package]]
+name = "configargparse"
+version = "1.5.3"
+description = "A drop-in replacement for argparse that allows options to also be set via config files and/or environment variables."
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+files = [
+    {file = "ConfigArgParse-1.5.3-py3-none-any.whl", hash = "sha256:18f6535a2db9f6e02bd5626cc7455eac3e96b9ab3d969d366f9aafd5c5c00fe7"},
+    {file = "ConfigArgParse-1.5.3.tar.gz", hash = "sha256:1b0b3cbf664ab59dada57123c81eff3d9737e0d11d8cf79e3d6eb10823f1739f"},
+]
+
+[package.extras]
+test = ["PyYAML", "mock", "pytest"]
+yaml = ["PyYAML"]
+
+[[package]]
 name = "contourpy"
 version = "1.0.7"
 description = "Python library for calculating contours of 2D quadrilateral grids"
@@ -548,6 +564,69 @@ files = [
 tests = ["asttokens", "littleutils", "pytest", "rich"]
 
 [[package]]
+name = "findent"
+version = "4.2.6"
+description = "findent: powerful Fortran formatter"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "findent-4.2.6-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:88587b1aa9341487bd25feee2cf271ecbd687c4f3aea1ab214209234c282e163"},
+    {file = "findent-4.2.6-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:c2210a16affba12cbe9d65d95faeee7fa08a48154c74368ca68816fd3ed44edf"},
+    {file = "findent-4.2.6-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:9401bfad43b92856abe0a93377097f59fe0f3e735314bb9eb924733d6994abb3"},
+    {file = "findent-4.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:796e725087262865844c1e83144ef26a173309153caaedb8cf481c771df510b8"},
+    {file = "findent-4.2.6-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:c5fa0fc144025cec69a54114e4ba6c10ee1011368b7b9b5bd086ce64f18dff46"},
+    {file = "findent-4.2.6-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:c8965b8d40a13c3baa2741bf9fa353ec46ef2ad26bd460d276cd66056a1630e2"},
+    {file = "findent-4.2.6-cp310-cp310-win_amd64.whl", hash = "sha256:0d596971cda28c8577cc39a66a631b8c2e9f5d3f7cb49bbad1b28b1d40ef272c"},
+    {file = "findent-4.2.6-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:914a4a51ab397b835743c1092f52048840d548147da75db552ca4413381c876d"},
+    {file = "findent-4.2.6-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:133a5a4ea443d54488b8ed7c87f79ded389a73aad3bf204f5cd6bd92ee752e23"},
+    {file = "findent-4.2.6-cp311-cp311-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7322bc53d39ce999cb1973d264a8d526134c49b1d89b0cd426ca098b0a2fb8c4"},
+    {file = "findent-4.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b7b473b69c064983564b92a023ac0e144b2f328d0d00743f5f52a8304d520a04"},
+    {file = "findent-4.2.6-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:472620d2c7730d0640444e4fb88aa778eb895abbfc9d5da690d4ef1c6761251c"},
+    {file = "findent-4.2.6-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:7407e289532bc736067bd4797ab4a86357a52dfc810f21cf336c82699cd9bda0"},
+    {file = "findent-4.2.6-cp311-cp311-win_amd64.whl", hash = "sha256:e3453d1d4b9fab74685ddaf83cb8f6a5837ae81b5466eba02860291b83a1eb55"},
+    {file = "findent-4.2.6-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:a9cc623290367e8dab36478adaca9a5d71cafe04ceb7aa67982ac16253e2b1cd"},
+    {file = "findent-4.2.6-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:000ef5a98e68d05d675679e5a31bdffa199a449319f630cf3e55aa9a04051eca"},
+    {file = "findent-4.2.6-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3a4ff7cf0483b57da6bc58639467cf6a534ab606682d776effe70270666047f7"},
+    {file = "findent-4.2.6-cp37-cp37m-musllinux_1_1_i686.whl", hash = "sha256:a31f75f5bab121a0ca5630e7973500146b63222c237ef92fa09bb0c2caaea272"},
+    {file = "findent-4.2.6-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:e67922e2f65ae17abbb39a5bf3297a8557d1978888a88a041dec690e5276687d"},
+    {file = "findent-4.2.6-cp37-cp37m-win_amd64.whl", hash = "sha256:f051a61512b6512f0525327aa2cf7482b3b179f647fa50b38bfe61f0a0966321"},
+    {file = "findent-4.2.6-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:f241294bd8d8402bf4478a609ab7c77e03c16aeacc2915fe24bf392bee8aae19"},
+    {file = "findent-4.2.6-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:d41955623d1de95338bb1d3a76acfc92f91ea55d770db866786b9121063e91b4"},
+    {file = "findent-4.2.6-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:995d0b3b5d515a14413fe010a8809ff5a8579e1e689a393cd9f6a3bc51fc920b"},
+    {file = "findent-4.2.6-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6b33aa69a1190d1a35c02c53c9aae640185250ac3478f1761b8218d35623405c"},
+    {file = "findent-4.2.6-cp38-cp38-musllinux_1_1_i686.whl", hash = "sha256:444c2c33b1fa449f9d812ebd08f011281963c317a8f26bc42d1fe8d6a789426c"},
+    {file = "findent-4.2.6-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:977c12736718c6c2f9aa9321b7d9d801b4257f48f0f08245a21df377a6867d86"},
+    {file = "findent-4.2.6-cp38-cp38-win_amd64.whl", hash = "sha256:897c84acb4dba85f9374e9cc962a8f6b7005d0b8d698bb7f6ae6a9bdfed3f921"},
+    {file = "findent-4.2.6-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:9a33c0ee01458958395cdb2cbf2c01869dd2368d0d0ddf52319f499f2f7de7d5"},
+    {file = "findent-4.2.6-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:085573c8d0dd1e5e703d489ad622e0b03695c7211c4dc614d8fbc92c3b9af04c"},
+    {file = "findent-4.2.6-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ae50fbf57ab1eb3d12ecedaf2764154b761f18d34f3ca51ac94dc6b9afd21004"},
+    {file = "findent-4.2.6-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cbfd319d9aa5bee7a5dad325d66f32c40cce38c141c4b1b4efc082b2ab69ad97"},
+    {file = "findent-4.2.6-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:ae2431d8c46cce9a609a88d6c2ca9c9bd2e6b91b8930157d3db48f86dcc939f4"},
+    {file = "findent-4.2.6-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:ad4bc8bdf9ee591184434d238ee63efc2621f7039d2f63a9a7c8e3f429519c4e"},
+    {file = "findent-4.2.6-cp39-cp39-win_amd64.whl", hash = "sha256:22c610a522eb224b8ce8b74431f996c74c5e5c94c28468c0a32c466e94bf4b74"},
+    {file = "findent-4.2.6-pp37-pypy37_pp73-macosx_10_9_x86_64.whl", hash = "sha256:b05c62e4254897fa7edbe8c9fdfe840a318169c33c4910e673131fc812321867"},
+    {file = "findent-4.2.6-pp37-pypy37_pp73-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:25eb704b4c060f0eb3b463f9f35e3224dd97a6e41a7e8d37dc54c3fee8590a17"},
+    {file = "findent-4.2.6-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3b17ea98149946324a5b046e2151096882f06c88b6d6a862d902d344afc116d8"},
+    {file = "findent-4.2.6-pp37-pypy37_pp73-win_amd64.whl", hash = "sha256:49a0ed560cb4d7f3c63c48e811aab53d4ab58abcbcb005e492a377a78761bc0a"},
+    {file = "findent-4.2.6-pp38-pypy38_pp73-macosx_10_9_x86_64.whl", hash = "sha256:169f4ac2af3b2f90684d4aa5a726b77b7c9ff69e4cd6fb9de643fcdd0bd4eb4f"},
+    {file = "findent-4.2.6-pp38-pypy38_pp73-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:27171281cc78e5fad9761b8e06c5cac455d7cf194eaa73049505b752eaaeca2e"},
+    {file = "findent-4.2.6-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fbb9d87ec1e271e88b429e811135f00f34ac47e57cf43c240432e8d13c85822b"},
+    {file = "findent-4.2.6-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:c5539d96ec2c8557d29d4e263d87fe3c2765f5082224bf194b4e856f9ed15f8e"},
+    {file = "findent-4.2.6-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:49bd4a2c575c4347eca4d9d5f61f1681da01efd999c5e0544aea46e97dc44098"},
+    {file = "findent-4.2.6-pp39-pypy39_pp73-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e0dcd2766d0c4949119ef60d75e9f1f2e36105038115f5839da423416385953c"},
+    {file = "findent-4.2.6-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:33208fc5f55002dbc30c98bf7944177833dfcb1575852dd1cac070589e031fc0"},
+    {file = "findent-4.2.6-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:d30883c30d0246bca4ede0a1167922feaf8467603aab68b102b5654a27495131"},
+    {file = "findent-4.2.6-py3-none-macosx_10_9_x86_64.whl", hash = "sha256:9908bb8aa26556a787d44dc96a4b82b0b4757581d4b19fff0fdd7090d0643b79"},
+    {file = "findent-4.2.6-py3-none-macosx_11_0_arm64.whl", hash = "sha256:2f10ef826f42f40a1261f42c3c90bb89a190266d63b7d2a73db917ee677a384b"},
+    {file = "findent-4.2.6-py3-none-manylinux2010_i686.manylinux2014_i686.manylinux_2_12_i686.manylinux_2_17_i686.whl", hash = "sha256:47fc88336daaba78405df15f1f6ec0b9eda4242ff01b06d2b6fdeafeb6dd98b5"},
+    {file = "findent-4.2.6-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:dcdb5466ac038793de4452c57ef7b825f40289b105df46f423fe26744a1d9bc8"},
+    {file = "findent-4.2.6-py3-none-musllinux_1_1_i686.whl", hash = "sha256:896267266381d26a1402445a83c9b77994010cc6a6355257e0039ec117183aed"},
+    {file = "findent-4.2.6-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:5e590839221871ebbddfa19105e514adb7e52ff95fabff855bb734e6b8f6ca38"},
+    {file = "findent-4.2.6-py3-none-win_amd64.whl", hash = "sha256:670931af918504c7aa9a3b182d01dfea97d21b65178189fbdb5b954b77ca80bc"},
+]
+
+[[package]]
 name = "fonttools"
 version = "4.39.3"
 description = "Tools to manipulate font files"
@@ -572,6 +651,32 @@ type1 = ["xattr"]
 ufo = ["fs (>=2.2.0,<3)"]
 unicode = ["unicodedata2 (>=15.0.0)"]
 woff = ["brotli (>=1.0.1)", "brotlicffi (>=0.8.0)", "zopfli (>=0.1.4)"]
+
+[[package]]
+name = "fortran-language-server"
+version = "1.12.0"
+description = "FORTRAN Language Server for the Language Server Protocol"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "fortran-language-server-1.12.0.tar.gz", hash = "sha256:ec3921ef23d7e2b50b9337c9171838ed8c6b09ac6e1e4fa4dd33883474bd4f90"},
+]
+
+[[package]]
+name = "fprettify"
+version = "0.3.7"
+description = "auto-formatter for modern fortran source code"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "fprettify-0.3.7-py3-none-any.whl", hash = "sha256:56f0a64c43dc47134ce32af2e5da8cd7a1584897be29d19289ec5d87510d1daf"},
+    {file = "fprettify-0.3.7.tar.gz", hash = "sha256:1488a813f7e60a9e86c56fd0b82bd9df1b75bfb4bf2ee8e433c12f63b7e54057"},
+]
+
+[package.dependencies]
+configargparse = "*"
 
 [[package]]
 name = "fsspec"
@@ -2136,4 +2241,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "73b5354f2761a91fe680b7138bc24755ad4baa5f3e45e230e24b636f707e6651"
+content-hash = "5a45e583c55818762207f2c909e5fe3d7fbd6ba85a803ef9308479b5bc3fc9ee"
