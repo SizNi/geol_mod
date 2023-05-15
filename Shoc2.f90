@@ -4,6 +4,7 @@ $      debug
 	 integer,parameter ::	npar=5
 	 real u(nrand,npar)
 	 real kf,igrad,kmin,kmax,imin,imax,alfamin,alfamax,mmin,mmax,m
+	! объявление динамических массивов 
 	real c	[allocatable] (:,:)
     real cx	[allocatable] (:,:)
     real vx	[allocatable] (:,:)
@@ -15,7 +16,7 @@ $      debug
 	real crez	[allocatable] (:,:)
 	real q	[allocatable] (:,:)
 
-
+	! задание переменной с ограничением памяти
 	integer*2 ierr
 	integer*4 step
 	  mmin=5
@@ -28,6 +29,7 @@ $      debug
 	  alfamax=330.
 	  kmin=5
 	  kmax=20
+	! выделяется память для массивов
 	allocate (c(nx,ny),stat=ierr)
  	allocate (cx(nx,ny),stat=ierr)
 	allocate (cy(nx,ny),stat=ierr)
@@ -70,7 +72,8 @@ c(nxs,nys)=100.
 			q(NXskv(nsk),NYskv(nsk))=-a1(nsk)
 			end do
 
-
+! это выделение памяти для массивов
+! в питоне не нужно
 loop1 :   do step=1,nstep 
 		!	do nsk=1,nskv
 		!	c(NXskv(nsk),NYskv(nsk))=1
@@ -78,6 +81,7 @@ loop1 :   do step=1,nstep
 	    allocate (c05(nx+1),stat=ierr)
 	    allocate (v1(nx+1),stat=ierr)
 	    allocate (c1(nx+1),stat=ierr)
+! тут ----------------------------
 loop2 :	do k=2,ny-1 
 		   do i=1,nx 
 	    	     c1(i)=c(i,k)
