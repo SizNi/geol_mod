@@ -34,8 +34,6 @@ v1 = np.array([], dtype=float)
 c05 = np.array([], dtype=float)
 crez = np.zeros((nx, ny), dtype=float)
 q = np.zeros((nx, ny), dtype=float)
-crez = 0.0
-q = 0.0
 # рандомно заполняем массив u
 u = rands_1(nrand, npar)
 for irand in range(1, nrand + 1):
@@ -51,29 +49,26 @@ for irand in range(1, nrand + 1):
     for i in range(1, nx + 1):
         for k in range(1, ny + 1):
             vx[i - 1, k - 1] = kf * cos(radians(alfa)) * igrad / por
-            c[i - 1, k - 1] = 0.0
             vy[i - 1, k - 1] = kf * sin(radians(alfa)) * igrad / por
-            cx[i - 1, k - 1] = 0.0
-            cy[i - 1, k - 1] = 0.0
 # вызываем расчетный модуль
 vx, vy = vel(ny, nx, dx, dy, vx, vy, a1, nxskv, nyskv, nskv)
-c[nxs, nys] = 100
+c[nxs, nys] = 100.0
 
 for nsk in range(1, nskv + 1):
     q[nxskv[nsk - 1], nyskv[nsk - 1]] = -a1[nsk - 1]
+    # print(q)
+# np.savetxt('test.txt', q)
 # охватываем loop_1
 for step in range(1, nstep + 1):
-    cx = np.zeros((nx, ny))
-    cy = np.zeros((nx, ny))
 
     for k in range(2, ny - 1):
         c1 = c[:, k].copy()
         v1 = vx[:, k].copy()
         # вынес в отдельный файл рассчет массива c05
         c05 = shock_1(c05, c1, v1, dx, dt, nx)
-
+        
         cx[:, k] = c05
-
+    print(c1)
     for i in range(2, nx - 1):
         c1 = c[i, :].copy()
         v1 = vy[i, :].copy()

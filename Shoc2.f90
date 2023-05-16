@@ -66,7 +66,7 @@ end do
 
 
 call VEL(ny, nx, dx, dy, VX, VY, A1, NXskv, NYskv, NSKV)
-c(nxs, nys) = 100.
+	c(nxs, nys) = 100.
 
 do nsk = 1, nskv
    q(NXskv(nsk), NYskv(nsk)) = -a1(nsk)

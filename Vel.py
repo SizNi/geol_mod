@@ -10,13 +10,11 @@ def vel(n1, n2, x, y, vx, vy, a, nx, ny, nskv):
         for ix in range(2, nxx):
             x1[i] += (x[ix - 1] + x[ix]) / 2
 
-        xc = x1[nskv]
 
         nyy = ny[i]
         for iy in range(2, nyy):
             y1[i] += (y[iy - 1] + y[iy]) / 2
 
-        yc = y1[nskv]
 
     x2 = x[0] / 2
     y2 = y[0] / 2
