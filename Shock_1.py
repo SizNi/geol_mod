@@ -11,10 +11,9 @@ def shock_1(c05, c, v, dx, dt, nx):
     iapr = 2
     # iapr = 1
     # походу тут идет ошибочные ограничения счетчика
-    for j in range(1, nx):
+    for j in range(1, nx-1):
         sig = 1 if v[j] >= 0 else -1  # Определяем знак sig в зависимости от значения v[j]
         if iapr > 1:
-            print(len(c))
             r1 = c[j + 1 - sig] - c[j - sig]  # Вычисляем r1
             r2 = c[j + 1] - c[j]  # Вычисляем r2
             if r2 * r1 <= 0.0:
