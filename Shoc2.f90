@@ -41,16 +41,20 @@ $      debug
 	 	    crez=0.
             q=0. 
 			! here--------------------------
+! добавляем массив случайнх значений
 call rands_1(nrand, npar, u)
+! на основании случ значений вычисляем основные параметры
 do irand = 1, nrand
    igrad = imin + u(irand, 1) * (imax - imin)
    alfa = alfamin + u(irand, 2) * (alfamax - alfamin)
    m = mmin + u(irand, 3) * (mmax - mmin)
    kf = kmin + u(irand, 4) * (kmax - kmin)
    por = pormin + u(irand, 5) * (pormax - pormin)
+   ! a - дебит скважин, получаем абстрактный параметр
    do i = 1, nskv
       a1(i) = -a(i) / (m * por)
    end do
+   ! вычисление скоростей без скважин
    do i = 1, nx
       do k = 1, ny
          vx(i, k) = kf * cosd(alfa) * igrad / por
@@ -64,10 +68,13 @@ end do
 
 
 
-
+! вычисление скоростей с учетом расхода скважин
+! nxskv - координаты скважины
 call VEL(ny, nx, dx, dy, VX, VY, A1, NXskv, NYskv, NSKV)
+! непонятно что
 	c(nxs, nys) = 100.
 
+! расход в трех скважинах
 do nsk = 1, nskv
    q(NXskv(nsk), NYskv(nsk)) = -a1(nsk)
 end do
@@ -85,13 +92,15 @@ loop1:
       allocate(c1(nx + 1), stat = ierr)
 
 loop2:
+! откидываем последние ряды по y
       do k = 2, ny - 1
+         ! сворачиваем двумерный массив в одномерный
          do i = 1, nx
             c1(i) = c(i, k)
             v1(i) = vx(i, k)
          end do
          call shock1(c05, c1, v1, dx, dt, nx)
-
+         ! одномерный массив в двумерный (грани по y и x)
          do i = 1, nx
             cx(i, k) = c05(i)
          end do
@@ -111,7 +120,7 @@ loop3:
             v1(k) = vy(i, k)
          end do
          call shock1(c05, c1, v1, dy, dt, ny)
-
+         ! одномерный массив в двумерный (грани по y и x)
          do k = 1, ny
             cy(i, k) = c05(k)
          end do
@@ -119,7 +128,7 @@ loop3:
       end do loop3
 
       deallocate(c05, v1, c1)
-
+      ! выполняется в рамках луп 1 (первое значение будет 0)
       do k = 2, ny - 2
          do i = 2, nx - 2
             c(i, k) = c(i, k) + dt / (dx(i) * dy(k)) * (dy(k) * (vx(i - 1, k) * cx(i - 1, k) - vx(i, k) * cx(i, k)) + dx(i) * (vy(i, k - 1) * cy(i, k - 1) - vy(i, k) * cy(i, k) + Q(i, k) * c(i, k)))
@@ -135,6 +144,7 @@ loop3:
 
 end do loop1
 
+! если концентрация больше 0.5 значит фронт пришел и туда добавляется 1
 do i = 1, nx
     do k = 1, ny
         if (c(i, k) >= 0.5) then
@@ -146,7 +156,7 @@ end do
 ! do k = 1, ny
 !     write (1, '(40f7.3)') (c(i, k), i = 1, nx)
 ! end do
-
+! запись результирующего файла
 do i = 1, nx - 1
     do k = 1, ny - 1
         write (1, '(6g12.5)') i * 10. - 5., k * 10. - 5., c(i, k), crez(i, k), vx(i, k), vy(i, k)
@@ -154,7 +164,7 @@ do i = 1, nx - 1
 end do
 
 end
-
+! считаем концентрацию на гранях
 ! вынесена в отдельный файл
 subroutine shock1(c05, c, v, dx, dt, nx)
    real c(nx+1)

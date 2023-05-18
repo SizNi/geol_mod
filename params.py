@@ -34,6 +34,19 @@ dy = np.full(ny, 10.0)
 # просто задаем переменную
 dt = 2.0
 nstep = 400
-#----------------------------
+# ----------------------------
+etalon = np.zeros((nx, ny), dtype=float)
 # массив скоростей по x
 vx = np.zeros((nx, ny), dtype=float)
+# массив скоростей по y
+vy = np.zeros((nx, ny), dtype=float)
+# расход скважин
+q = np.zeros((nx,ny), dtype=float)
+# концентрации
+c = np.zeros((nx, ny), dtype=float)
+# концентраии на разделениях блоков
+c05 = np.zeros(nx, dtype=float)
+cx = np.zeros((nx, ny), dtype=float)
+cy = np.zeros((nx, ny), dtype=float)
+# для концентраций (доведение до 1 если надо)
+crez = np.zeros((nx, ny), dtype=float)
