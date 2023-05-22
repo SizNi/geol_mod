@@ -39,6 +39,7 @@ def mod():
     bar = IncrementalBar("step", max=nstep)
     # задаем массивы для сворачивания двумерного в одномерный
     c1 = v1 = np.zeros(nx + 1)
+    # c05 - концентрация на границе блока (половина длинны от центра блока)
     c05_x = np.zeros(nx, dtype=float)
     c05_y = np.zeros(ny, dtype=float)
     for step in range(nstep):
@@ -51,6 +52,7 @@ def mod():
         for i in range(1, nx - 1):
             c1[:ny] = c[i, :ny]
             v1[:ny] = vy[i, :ny]
+            # собираем массив обратно в двумерный (между блоками по y)
             c05_y = shock_1(c05_y, c1, v1, dy, dt, ny)
             cy[i, :ny] = c05_y[:]
             # print(np.array_equal(etalon, cx))
@@ -66,6 +68,7 @@ def mod():
                     )
                 )
         old = False
+        # на фортране было создание этих 3 файлов, сейчас они вроде бы не нужны, вынес в цикл
         if old:
             with open("output_2.txt", "a") as file2, open(
                 "output_3.txt", "a"
@@ -83,7 +86,7 @@ def mod():
     bar.finish()
     # прибавляем 1, если фронт дошел до скважины
     crez[np.where(c >= 0.5)] += 1.0
-    # запись результирующего файла
+    # запись результирующего файла (на фортране был output_1.txt)
     data_for_df = []
     for i in range(1, nx):
         for k in range(1, ny):
@@ -93,7 +96,7 @@ def mod():
     df = pd.DataFrame(
         data_for_df, columns=["X", "Y", "Concentrations", "Crez", "Vx", "Vy"]
     )
-    # вместо output_1 из фортрана
+    # сохранение файла в целом не нужно, если нужна картинка, можно на визуализацию передавать датасет
     df.to_csv("dataset.csv", index=False)
     # визуализация
     viz(df)
