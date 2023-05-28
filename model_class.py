@@ -19,7 +19,7 @@ class Block:
     # факт дохода фронта до блока
     migration_front: int = 0
 
-       
+
 @dataclass
 class Well:
     # координаты скважины

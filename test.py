@@ -10,6 +10,7 @@ class Well:
     # дебит скважины
     q_skv: float = 0
 
+
 well = Well(1, 1, 1)
 well_2 = Well(4, 4, 4)
 well_3 = Well(5, 5, 5)

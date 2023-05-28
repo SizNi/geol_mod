@@ -4,7 +4,7 @@ import numpy as np
 def vel(nx, ny, dx, dy, vx, vy, a1, nxskv, nyskv, nskv):
     x1 = np.zeros(nskv)
     y1 = np.zeros(nskv)
-
+    # по количеству скважин
     for i in range(nskv):
         x1[i] = np.sum((dx[: nxskv[i] - 1] + dx[1 : nxskv[i]]) / 2)
         y1[i] = np.sum((dy[: nyskv[i] - 1] + dy[1 : nyskv[i]]) / 2)

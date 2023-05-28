@@ -1,9 +1,12 @@
 SUBROUTINE VEL(N1, N2, X, Y, VX, VY, A, NX, NY, NSKV)
    DIMENSION X(N2), Y(N1), VX(N2, N1), VY(N2, N1), A(NSKV), X1(100), Y1(NSKV), NX(NSKV), NY(NSKV)
    ! ny, nx, dx, dy, VX, VY, A1, NXskv, NYskv, NSKV
+   ! по количеству скажин
    DO I = 1, NSKV
       X1(I) = 0
+      ! выбираем координату по x первой скважины
       NXX = NX(I)
+      ! заполняем в x1 от второй ячейки до ячейки скважины
       DO IX = 2, NXX
          X1(I) = X1(I) + (X(IX - 1) + X(IX)) / 2
       END DO

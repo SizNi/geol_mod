@@ -14,6 +14,7 @@ m_max = 10.0
 por_min = 0.2
 por_max = 0.4
 
+
 # генератор стартовых параметров
 def params():
     i_grad = random.uniform(i_min, i_max)
@@ -30,11 +31,11 @@ def well_generation(well_count, n_x_skv, n_y_skv, m, por):
     well_matrix = np.empty(well_count, dtype=object)
     for i in range(well_count):
         q_skv = 10 / (m * por)
-        well_matrix[i] = (Well(n_x_skv[i], n_y_skv[i], q_skv))
+        well_matrix[i] = Well(n_x_skv[i], n_y_skv[i], q_skv)
     return well_matrix
 
 
-if __name__ == '__main__':
+'''if __name__ == "__main__":
     well_count = 3
     # координаты скважин
     n_x_skv = np.array([20, 30, 25])
@@ -42,4 +43,4 @@ if __name__ == '__main__':
     q_skv = 10.0
     m = 11
     por = 0.3
-    well_generation(well_count, n_x_skv, n_y_skv, m, por)
+    well_generation(well_count, n_x_skv, n_y_skv, m, por)'''
