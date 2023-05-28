@@ -1,6 +1,6 @@
 SUBROUTINE VEL(N1, N2, X, Y, VX, VY, A, NX, NY, NSKV)
    DIMENSION X(N2), Y(N1), VX(N2, N1), VY(N2, N1), A(NSKV), X1(100), Y1(NSKV), NX(NSKV), NY(NSKV)
-
+   ! ny, nx, dx, dy, VX, VY, A1, NXskv, NYskv, NSKV
    DO I = 1, NSKV
       X1(I) = 0
       NXX = NX(I)

@@ -45,27 +45,29 @@ def viz(df):
     # Сохранение графика в файл
     plt.savefig("res.png")
 
-def final_viz(df = pd.read_csv("dataset_crez.csv"), nrand = 100):
+
+def final_viz(df=pd.read_csv("dataset_crez.csv"), nrand=100):
     sns.set_theme(style="darkgrid")
     # Интерполяция данных
-    xi = np.linspace(df['X'].min(), df['X'].max(), 400)
-    yi = np.linspace(df['Y'].min(), df['Y'].max(), 400)
+    xi = np.linspace(df["X"].min(), df["X"].max(), 400)
+    yi = np.linspace(df["Y"].min(), df["Y"].max(), 400)
     xi, yi = np.meshgrid(xi, yi)
-    zi = griddata((df['X'], df['Y']), df['Crez'], (xi, yi), method='linear')
+    zi = griddata((df["X"], df["Y"]), df["Crez"], (xi, yi), method="linear")
 
     # Построение тепловой карты на основе интерполированных данных
-    ax = sns.heatmap(zi, cmap='YlGnBu')
-    
+    ax = sns.heatmap(zi, cmap="YlGnBu")
+
     # Добавление изолиний равных значений
-    contour_levels = [nrand/10, nrand/4, nrand/2, nrand*3/4]
-    contour = plt.contour(xi, yi, zi, levels=contour_levels, colors='k')
+    contour_levels = [nrand / 10, nrand / 4, nrand / 2, nrand * 3 / 4]
+    contour = plt.contour(xi, yi, zi, levels=contour_levels, colors="k")
     plt.clabel(contour, inline=True, fontsize=8)
-    
+
     # Настройка осей и заголовка
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.title('Interpolated Heatmap')
-    plt.savefig('final_res.png')
-    
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.title("Interpolated Heatmap")
+    plt.savefig("final_res.png")
+
+
 if __name__ == "__main__":
     final_viz()

@@ -1,12 +1,11 @@
 import numpy as np
-from math import cos, radians
+from math import cos, sin, radians
 from params import *
 from Vel import vel
 from Shock_1 import shock_1
 from progress.bar import IncrementalBar
 import pandas as pd
 from vizualize import final_viz
-
 
 
 def mod():
@@ -37,16 +36,16 @@ def mod():
         kf = kmin + u[irand, 3] * (kmax - kmin)
         por = pormin + u[irand, 4] * (pormax - pormin)
         # абстрактный параметр, основанный на дебите скважин
-        for i in range(nskv):
-            a1[i] = a[i] / (m * por)
+        # цикл заменен на поэлементное деление
+        a1 = a / (m * por)
         # вычисляем поле скоростей без скважин
         vx[:, :] = -kf * cos(radians(alfa)) * igrad / por
-        vy[:, :] = -kf * cos(radians(alfa)) * igrad / por
+        vy[:, :] = -kf * sin(radians(alfa)) * igrad / por
         # вычисляем поле скоростей со скважинами
         vx, vy = vel(nx, ny, dx, dy, vx, vy, a1, nxskv, nyskv, nskv)
         # переносим расходы скважин на сетку
-        for nsk in range(nskv):
-            q[nxskv[nsk], nyskv[nsk]] = -a1[nsk]
+        # цикл также заменен поэлементным обращением
+        q[nxskv, nyskv] = -a1
         # задаем массивы для сворачивания двумерного в одномерный
         c1 = v1 = np.zeros(nx + 1)
         # c05 - концентрация на границе блока (половина длинны от центра блока)
@@ -98,10 +97,10 @@ def mod():
             data_for_df, columns=["X", "Y", "Concentrations", "Crez", "Vx", "Vy"]
         )
         # Разобраться!!!!!!!!!!!!!!!!!
-        df_crez['X'] = df['X']
-        df_crez['Y'] = df['Y']
-        
-        df_crez['Crez'] = data_for_final_df
+        df_crez["X"] = df["X"]
+        df_crez["Y"] = df["Y"]
+
+        df_crez["Crez"] = data_for_final_df
         # сохранение файла в целом не нужно, если нужна картинка, можно на визуализацию передавать датасет
         df.to_csv("dataset.csv", index=False)
         # визуализация
