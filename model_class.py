@@ -4,6 +4,9 @@ import numpy as np
 
 @dataclass
 class Block:
+    # координаты блока
+    x = 0.0
+    y = 0.0
     # коэффициент фильтрации
     k_f: float = 0.0
     # скорости по двум направлениям
