@@ -110,7 +110,8 @@ END DO loop3
     END DO
   END DO
 END DO loop1
-
+c[j, i] = c[j, i] + dt / (dx[j] * dy[i]) * (dy[i] * (vx[j - 1, i] * cx[j - 1, i] - vx[j, i] * cx[j, i]) + dx[j] * (vy[j, i - 1] * cy[j, i - 1] - vy[j, i] * cy[j, i] + Q[j, i] * c[j, i]))
+                
 DO i = 1, nx
   DO k = 1, ny
     IF (c(i, k) .GE. 0.5) THEN

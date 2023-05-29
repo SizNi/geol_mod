@@ -26,11 +26,9 @@ def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
                 y_h = y_2 - y_1[k]
                 x_x = x_2 - x_1[k]
                 modelling_matrix[j, i].v_x = (
-                    a_1[k]
-                    * (np.arctan(y_b / x_x) - np.arctan(y_h / x_x))
-                    / d_y[i]
+                    a_1[k] * (np.arctan(y_b / x_x) - np.arctan(y_h / x_x)) / d_y[i]
                 )
-                print(modelling_matrix[j, i].v_y)
+                # print(modelling_matrix[j, i].v_x)
             if j < n_x - 1:
                 x_2 += d_x[j + 1]
         y_2 = y_3
@@ -49,7 +47,7 @@ def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
                 modelling_matrix[i, j].v_y = (
                     a_1[k] * (np.arctan(x_p / y_y) - np.arctan(x_l / y_y)) / d_x[i]
                 )
-                print(modelling_matrix[j, i].v_y)
+                # print(modelling_matrix[j, i].v_y)
             if j < n_y - 1:
                 y_2 += d_y[j + 1]
         x_2 = x_3

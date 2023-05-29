@@ -35,7 +35,7 @@ def well_generation(well_count, n_x_skv, n_y_skv, m, por):
     return well_matrix
 
 
-'''if __name__ == "__main__":
+"""if __name__ == "__main__":
     well_count = 3
     # координаты скважин
     n_x_skv = np.array([20, 30, 25])
@@ -43,4 +43,4 @@ def well_generation(well_count, n_x_skv, n_y_skv, m, por):
     q_skv = 10.0
     m = 11
     por = 0.3
-    well_generation(well_count, n_x_skv, n_y_skv, m, por)'''
+    well_generation(well_count, n_x_skv, n_y_skv, m, por)"""
