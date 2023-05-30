@@ -1,79 +1,43 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
+import pandas as pd
 from scipy.interpolate import griddata
-from archive.params import *
+import matplotlib.pyplot as plt
 
-def с_map():
-    df = pd.read_csv('main_dataset.csv')
-    x = df.iloc[:, 0]
-    y = df.iloc[:, 1]
-    concentration = df.iloc[:, 3]
+def front_map(data = pd.read_csv("main_dataset.csv")):
+    # Извлечение координат и значений migration_front
+    x = data['X']
+    y = data['Y']
+    migration_front = data['Migration_front']
+
 
     # Создание сетки для интерполяции
-    xi = np.arange(0, 401, nx)
-    yi = np.arange(0, 401, ny)
+    xi = np.linspace(min(x), max(x), 400)
+    yi = np.linspace(min(y), max(y), 400)
     xi, yi = np.meshgrid(xi, yi)
-    # Интерполяция концентраций
-    zi = griddata((x, y), concentration, (xi, yi), method="cubic")
-    # Создание графика
-    plt.contourf(xi, yi, zi, levels=20, cmap="viridis")
+
+    # Интерполяция значений migration_front на сетке
+    zi = griddata((x, y), migration_front, (xi, yi), method='linear')
+    # Установка размера рисунка в дюймах
+    plt.figure(figsize=(10, 10))
+    # построение контурной карты
+    levels = np.linspace(0, 100, num=5)  # Значения для контуров
+    plt.contourf(xi, yi, zi, levels=levels, cmap='viridis')
+    # Построение тепловой карты
+    # plt.imshow(zi, extent=(min(x), max(x), min(y), max(y)), origin='lower', cmap='Pastel1')
     plt.colorbar()
-    # Добавление осей и заголовка
-    plt.xlabel("X")
-    plt.ylabel("Y")
-    plt.title("Interpolated Visualization of Dataset")
+    # Добавление контуров
+    contours = plt.contour(xi, yi, zi, levels=levels, colors='black', linewidths=0.5, alpha=0.5)  # Построение контуров
 
-    # Добавление сетки
-    plt.grid(True, linestyle="--", linewidth=0.5, color="black")
+    # Добавление подписей к контурам
+    plt.clabel(contours, inline=True, fontsize=6)
 
-    # Установка пределов на осях
-    plt.xlim(0, 400)
-    plt.ylim(0, 400)
+    # Отображение осей и меток
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Migration Front Contourmap')
+    # Сохранение графика в файл
+    plt.savefig("res.png")
 
-    # Добавление делений на осях X и Y
-    plt.xticks(xi[0])
-    plt.yticks(yi[:, 0])
-    plt.savefig("с.png")
 
-def c_2_map():
-    df = pd.read_csv('main_dataset.csv')
-    # Определение координат и значения для интерполяции
-    x = df['X']
-    y = df['Y']
-    values = df['Migration_front']
-
-    # Создание сетки
-    a = 10  # размер сетки по оси X
-    b = 10  # размер сетки по оси Y
-    xi = np.linspace(min(x), max(x), a)
-    yi = np.linspace(min(y), max(y), b)
-    xi, yi = np.meshgrid(xi, yi)
-
-    # Интерполяция данных на сетку
-    zi = griddata((x, y), values, (xi, yi), method='linear')
-
-    # Set up the figure
-    f, ax = plt.subplots(figsize=(8, 8))
-    ax.set_aspect("equal")
-
-    # Draw a contour plot to represent the bivariate density
-    sns.kdeplot(
-        data=df,
-        x="X",
-        y="Y",
-        hue="Migration_front",
-        thresh=.1,
-        levels=5,
-        alpha=0.8,
-    )
-
-    # Добавление интерполированных изолиний
-    plt.contour(xi, yi, zi, levels=5, colors='k', linestyles='dashed')
-
-    # Сохранение картинки
-    plt.savefig('my_plot.png')
-    
 if __name__ == "__main__":
-    c_2_map()
+    front_map()

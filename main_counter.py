@@ -23,10 +23,8 @@ d_t = 1.0
 n_step = 200
 
 
-# здеcь получаем одну реализацию полей параметров
+# Основной модуль расчета. Здеcь получаем одну реализацию полей параметров и записываем в датафрейм
 def main():
-    # задаем абcтрактный параметр
-    a_1 = np.zeros(well_count)
     # получаем cлучайные параметры в заданных рамках
     i_grad, alfa, m, k_f, por = params()
     # получаем маccив cкважин
@@ -36,7 +34,7 @@ def main():
     
     for i in range(n_x):
         for j in range(n_y):
-            # заполняем матрицу пуcтыми значениями
+            # заполняем матрицу экземплярами блока с координатами
             modelling_matrix[i, j] = Block()
             # задаем координаты блока
             modelling_matrix[i, j].x = i * 10.0 + 5.0
@@ -97,13 +95,13 @@ def main():
                         + modelling_matrix[m, k].q * modelling_matrix[m, k].c
                     )
                 )
-    data_for_df = []
     # определяем, дошел фронт или нет, если дошел - добавляем 1
     for i in range(n_x):
         for j in range(n_y):
             if modelling_matrix[i, j].c >= 0.5:
                 modelling_matrix[i, j].migration_front += 1
-
+    # добавляем данные в массив
+    data_for_df = []
     for i in range(n_x - 1):
         for j in range(n_y - 1):
             data_for_df.append(
@@ -119,7 +117,7 @@ def main():
     df = pd.DataFrame(
         data_for_df, columns=["X", "Y", "Concentrations", "Migration_front", "Vx", "Vy"]
     )
-    # df.to_csv("dataset.csv", index=False)
+    df.to_csv("dataset.csv", index=False)
     return df
 
 
