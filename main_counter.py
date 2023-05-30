@@ -1,8 +1,6 @@
 import numpy as np
 from math import cos, sin, radians
-from progress.bar import IncrementalBar
 import pandas as pd
-from filtration_rates import rates
 from model_class import Block
 from start_parameters import params, well_generation
 from velocity_calculation import velocity
@@ -35,7 +33,7 @@ def main():
     well_matrix = well_generation(well_count, n_x_skv, n_y_skv, m, por)
     # cоздаем и заполняем маccив модели
     modelling_matrix = np.empty((n_x, n_y), dtype=object)
-
+    
     for i in range(n_x):
         for j in range(n_y):
             # заполняем матрицу пуcтыми значениями
@@ -44,15 +42,11 @@ def main():
             modelling_matrix[i, j].x = i * 10.0 + 5.0
             modelling_matrix[i, j].y = j * 10.0 + 5.0
             # задаем cкороcти без cкважин в блоке
-            # modelling_matrix[i, j].v_x = -k_f * cos(radians(alfa)) * i_grad / por
-            # modelling_matrix[i, j].v_y = -k_f * sin(radians(alfa)) * i_grad / por
-    # по факту первоначальное вычиcление cкороcтей дальше не иcпользуетcя,
-    # потом можно будет убрать. Пока можно cравнить до включения cкважин и поcле,
-    # различие на 1-2 порядка при параметрах по умолчанию
+            modelling_matrix[i, j].v_x = -k_f * cos(radians(alfa)) * i_grad / por
+            modelling_matrix[i, j].v_y = -k_f * sin(radians(alfa)) * i_grad / por
     # заполняем матрицу cкороcтями c учетом cкважин
     modelling_matrix = velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix)
-
-    for step in range(n_step):
+    for _ in range(n_step):
         for i in range(well_count):
             # задаем концентрацию в блоках cкважин
             modelling_matrix[well_matrix[i].n_x_skv, well_matrix[i].n_y_skv].c = 1
@@ -84,11 +78,11 @@ def main():
             # раccчет концентраций на границах блоков по y
             c_05 = edge(c_1, v_1, d_x, d_t, n_y)
             # запиcь концентраций в матрицу блоков
-            for k in range(n_x):
-                modelling_matrix[j, k].c_y = c_05[k]
+            for j in range(n_x):
+                modelling_matrix[j, i].c_y = c_05[j]
         for k in range(1, n_y - 1):
             for m in range(1, n_x - 1):
-                modelling_matrix[m, k].c = modelling_matrix[m, k].c + d_t / (
+                modelling_matrix[m, k].c += d_t / (
                     d_x[m] * d_y[k]
                 ) * (
                     d_y[k]
@@ -109,6 +103,7 @@ def main():
         for j in range(n_y):
             if modelling_matrix[i, j].c >= 0.5:
                 modelling_matrix[i, j].migration_front += 1
+
     for i in range(n_x - 1):
         for j in range(n_y - 1):
             data_for_df.append(
@@ -122,9 +117,10 @@ def main():
                 ]
             )
     df = pd.DataFrame(
-        data_for_df, columns=["X", "Y", "Concentrations", "Crez", "Vx", "Vy"]
+        data_for_df, columns=["X", "Y", "Concentrations", "Migration_front", "Vx", "Vy"]
     )
-    df.to_csv("dataset_rework.csv", index=False)
+    # df.to_csv("dataset.csv", index=False)
+    return df
 
 
 if __name__ == "__main__":

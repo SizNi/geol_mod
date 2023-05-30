@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 from scipy.interpolate import griddata
-from params import *
+from archive.params import *
 
 
 def viz(df):
