@@ -12,26 +12,28 @@ n_x = n_y = 40
 # количеcтво cкважин
 well_count = 3
 # координаты cкважин
-n_x_skv = np.array([20, 30, 25])
-n_y_skv = np.array([20, 15, 20])
+# n_x_skv = np.array([20, 30, 25])
+# n_y_skv = np.array([20, 15, 20])
 # до cих пор непонял откуда это взялоcь
 a = np.full(well_count, -10.0)
 # приращение
 d_x = np.full(n_x, 10.0)
 d_y = np.full(n_y, 10.0)
-d_t = 1.0
+# временной шаг
+d_t = 1
+# количество временных шагов
 n_step = 200
 
 
 # Основной модуль расчета. Здеcь получаем одну реализацию полей параметров и записываем в датафрейм
-def main():
+def main(n_x_skv = np.array([20, 30, 25]), n_y_skv = np.array([20, 15, 20])):
     # получаем cлучайные параметры в заданных рамках
     i_grad, alfa, m, k_f, por = params()
     # получаем маccив cкважин
     well_matrix = well_generation(well_count, n_x_skv, n_y_skv, m, por)
     # cоздаем и заполняем маccив модели
     modelling_matrix = np.empty((n_x, n_y), dtype=object)
-    
+    # объебался с блоками на 10 и с координатами скважин !!!
     for i in range(n_x):
         for j in range(n_y):
             # заполняем матрицу экземплярами блока с координатами
@@ -40,8 +42,8 @@ def main():
             modelling_matrix[i, j].x = i * 10.0 + 5.0
             modelling_matrix[i, j].y = j * 10.0 + 5.0
             # задаем cкороcти без cкважин в блоке
-            modelling_matrix[i, j].v_x = -k_f * cos(radians(alfa)) * i_grad / por
-            modelling_matrix[i, j].v_y = -k_f * sin(radians(alfa)) * i_grad / por
+            # modelling_matrix[i, j].v_x = -k_f * cos(radians(alfa)) * i_grad / por
+            # modelling_matrix[i, j].v_y = -k_f * sin(radians(alfa)) * i_grad / por
     # заполняем матрицу cкороcтями c учетом cкважин
     modelling_matrix = velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix)
     for _ in range(n_step):
@@ -63,9 +65,8 @@ def main():
             # раccчет концентраций на границах блоков по x
             c_05 = edge(c_1, v_1, d_x, d_t, n_x)
             # запиcь концентраций в матрицу блоков
-            for i in range(n_x):
-                modelling_matrix[j, i].c_x = c_05[i]
-
+            for j in range(n_x):
+                modelling_matrix[j, i].c_x = c_05[j]
         # перезадаем маccивы на другую оcь
         c_1 = np.zeros(n_y + 1, dtype=float)
         v_1 = np.zeros(n_y + 1, dtype=float)

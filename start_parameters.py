@@ -29,8 +29,8 @@ def params():
 def well_generation(well_count, n_x_skv, n_y_skv, m, por):
     # создаем массив скважин
     well_matrix = np.empty(well_count, dtype=object)
-    for i in range(well_count):
-        q_skv = 10 / (m * por)
+    q_skv = 10 / ((m * por) * well_count)
+    for i in range(well_count):    
         well_matrix[i] = Well(n_x_skv[i], n_y_skv[i], q_skv)
     return well_matrix
 
