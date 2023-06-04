@@ -28,20 +28,6 @@ def params():
 # генератор массива объектов скважин
 def well_generation(well_count, n_x_skv, n_y_skv, m, por):
     # создаем массив скважин
-    well_matrix = np.empty(well_count, dtype=object)
     q_skv = 10 / ((m * por) * well_count)
-    for i in range(well_count):
-        # уменьшаем на 1 из-за отсчета с нуля
-        well_matrix[i] = Well(n_x_skv[i]-1, n_y_skv[i]-1, q_skv)
-    return well_matrix
-
-
-"""if __name__ == "__main__":
-    well_count = 3
-    # координаты скважин
-    n_x_skv = np.array([20, 30, 25])
-    n_y_skv = np.array([20, 15, 20])
-    q_skv = 10.0
-    m = 11
-    por = 0.3
-    well_generation(well_count, n_x_skv, n_y_skv, m, por)"""
+    well_matrix = [Well(n_x - 1, n_y - 1, q_skv) for n_x, n_y in zip(n_x_skv, n_y_skv)]
+    return np.array(well_matrix)

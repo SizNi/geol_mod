@@ -2,7 +2,7 @@ import numpy as np
 
 
 def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
-    # вытаскиваем данные из массива классов
+    # вытаскиваем данные из массива экземпляров класса
     well_count = len(well_matrix)
     n_x_skv = np.array([obj.n_x_skv for obj in well_matrix])
     n_y_skv = np.array([obj.n_y_skv for obj in well_matrix])
@@ -18,7 +18,7 @@ def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
         for j in range(1, n_x_x):
             x_1[i] += (d_x[j - 1] + d_x[j]) / 2
         for j in range(1, n_y_y):
-            y_1[i] += (d_y[j - 1] + d_y[j]) / 2  
+            y_1[i] += (d_y[j - 1] + d_y[j]) / 2
 
     x_2 = d_x[0] / 2
     y_2 = d_y[0] / 2

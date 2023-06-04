@@ -1,6 +1,7 @@
 import numpy as np
 
 
+# рассчет концентраций на границах блоков
 def edge(c_1, v_1, d_x, d_t, n_axis):
     c_05 = np.zeros(n_axis + 1, dtype=float)
     r = np.ones(n_axis + 1)  # Инициализируем массив r значениями 1.0
