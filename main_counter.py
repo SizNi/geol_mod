@@ -38,7 +38,7 @@ def main(n_x_skv = np.array([20, 30, 25]), n_y_skv = np.array([20, 15, 20])):
         for j in range(n_y):
             # заполняем матрицу экземплярами блока с координатами
             modelling_matrix[i, j] = Block()
-            # задаем координаты блока
+            # задаем координаты блока !!! проблема тут с нумерацией!
             modelling_matrix[i, j].x = i * 10.0 + 5.0
             modelling_matrix[i, j].y = j * 10.0 + 5.0
             # задаем cкороcти без cкважин в блоке
@@ -54,7 +54,6 @@ def main(n_x_skv = np.array([20, 30, 25]), n_y_skv = np.array([20, 15, 20])):
             modelling_matrix[
                 well_matrix[i].n_x_skv, well_matrix[i].n_y_skv
             ].q = -well_matrix[i].q_skv
-
         c_1 = np.zeros(n_x + 1, dtype=float)
         v_1 = np.zeros(n_x + 1, dtype=float)
         # cворачиваем двумерные маccивы концентраций и cкороcтей в одномерные
@@ -72,13 +71,13 @@ def main(n_x_skv = np.array([20, 30, 25]), n_y_skv = np.array([20, 15, 20])):
         v_1 = np.zeros(n_y + 1, dtype=float)
         for i in range(1, n_x - 1):
             for j in range(n_y):
-                c_1[j] = modelling_matrix[j, i].c
-                v_1[j] = modelling_matrix[j, i].v_y
+                c_1[j] = modelling_matrix[i, j].c
+                v_1[j] = modelling_matrix[i, j].v_y
             # раccчет концентраций на границах блоков по y
             c_05 = edge(c_1, v_1, d_x, d_t, n_y)
             # запиcь концентраций в матрицу блоков
             for j in range(n_x):
-                modelling_matrix[j, i].c_y = c_05[j]
+                modelling_matrix[i, j].c_y = c_05[j]
         for k in range(1, n_y - 1):
             for m in range(1, n_x - 1):
                 modelling_matrix[m, k].c += d_t / (
@@ -101,10 +100,14 @@ def main(n_x_skv = np.array([20, 30, 25]), n_y_skv = np.array([20, 15, 20])):
         for j in range(n_y):
             if modelling_matrix[i, j].c >= 0.5:
                 modelling_matrix[i, j].migration_front += 1
+    # задание постоянной единицы в блоке скважины
+    for i in range(well_count):
+        modelling_matrix[well_matrix[i].n_x_skv, well_matrix[i].n_y_skv].migration_front = 1
     # добавляем данные в массив
     data_for_df = []
     for i in range(n_x - 1):
         for j in range(n_y - 1):
+            # print(modelling_matrix[i, j].x, modelling_matrix[i, j].y)
             data_for_df.append(
                 [
                     modelling_matrix[i, j].x,
@@ -113,10 +116,11 @@ def main(n_x_skv = np.array([20, 30, 25]), n_y_skv = np.array([20, 15, 20])):
                     modelling_matrix[i, j].migration_front,
                     modelling_matrix[i, j].v_x,
                     modelling_matrix[i, j].v_y,
+                    modelling_matrix[i, j].q,
                 ]
             )
     df = pd.DataFrame(
-        data_for_df, columns=["X", "Y", "Concentrations", "Migration_front", "Vx", "Vy"]
+        data_for_df, columns=["X", "Y", "Concentrations", "Migration_front", "Vx", "Vy", "Q"]
     )
     df.to_csv("dataset.csv", index=False)
     return df
