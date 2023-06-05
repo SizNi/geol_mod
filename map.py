@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 
 def front_map(
     data=pd.read_csv("main_dataset.csv"),
-    n_x_skv=np.array([20, 30, 25]),
-    n_y_skv=np.array([20, 15, 20]),
+    n_x_skv = np.array([40, 35, 45, 10]),
+    n_y_skv = np.array([40, 35, 45, 10]),
     b_size=10,
-    n_x=40,
-    n_y=40,
+    n_x=80,
+    n_y=80,
 ):
     # Извлечение координат и значений migration_front
     x = data["X"]
@@ -36,8 +36,10 @@ def front_map(
     contours = plt.contour(
         xi, yi, zi, levels=levels, colors="black", linewidths=0.5, alpha=0.5
     )
-    # Добавление вспомагательных контуров
+    # Добавление вспомогательных контуров
     plt.contour(xi, yi, zi, levels=intermediate_levels, colors='gray', linewidths=0.5, alpha=0.5)
+    # 0 - в белый цвет
+    plt.contourf(xi, yi, zi, levels=[-1e-9, 0], colors='white')
     # Добавление подписей к контурам
     plt.clabel(contours, inline=True, fontsize=6)
 

@@ -6,19 +6,20 @@ import numpy as np
 # количество итераций
 iteration_count = 100
 # размеры модели в блоках
-n_x = n_y = 40
+n_x = n_y = 80
 # координаты скважин
-n_x_skv = np.array([20, 30, 25])
-n_y_skv = np.array([20, 15, 20])
+n_x_skv = np.array([40, 35, 45, 10])
+n_y_skv = np.array([40, 35, 45, 10])
+# размер блока
+b_size = 10.0
 # приращение
-d_x = np.full(n_x, 10.0)
-d_y = np.full(n_y, 10.0)
+d_x = np.full(n_x, b_size)
+d_y = np.full(n_y, b_size)
 # временной шаг
 d_t = 1
 # количество временных шагов
-n_step = 200
-# размер блока
-b_size = 10
+n_step = 400
+
 
 
 def app_start():

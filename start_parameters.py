@@ -3,12 +3,12 @@ from model_class import Well
 import numpy as np
 
 
-k_f_min = 5.0
-k_f_max = 20.0
+k_f_min = 15.0
+k_f_max = 30.0
 i_min = 0.001
 i_max = 0.01
-alfa_min = 270.0
-alfa_max = 330.0
+alfa_min = 80
+alfa_max = 110
 m_min = 5.0
 m_max = 10.0
 por_min = 0.2
