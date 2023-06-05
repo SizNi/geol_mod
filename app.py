@@ -21,7 +21,6 @@ d_t = 1
 n_step = 400
 
 
-
 def app_start():
     bar_main = tqdm(total=iteration_count, desc="Iteration")
     # первый вызов функции и получение основного датасета

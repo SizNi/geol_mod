@@ -49,6 +49,7 @@ def front_map(
         [((y) * 10 - 5) for y in n_y_skv],
         c="red",
         label="Well",
+        s=2000/n_x,
     )
     # Добавление сетки с шагом 10
     x_ticks = np.arange(0, n_x * b_size + 1, b_size)
