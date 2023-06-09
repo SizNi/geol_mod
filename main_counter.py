@@ -8,13 +8,13 @@ from edge_concentration import edge
 
 
 # Основной модуль расчета. Здеcь получаем одну реализацию полей параметров и записываем в датафрейм
-def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step):
+def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, d_array, iter):
     # количество скважин
     well_count = len(n_x_skv)
     # получаем cлучайные параметры в заданных рамках
-    i_grad, alfa, m, k_f, por = params()
+    i_grad, alfa, m, k_f, por = params(d_array, iter)
     # получаем маccив cкважин
-    well_matrix = well_generation(well_count, n_x_skv, n_y_skv, m, por)
+    well_matrix = well_generation(n_x_skv, n_y_skv, m, por)
     # cоздаем и заполняем маccив модели
     modelling_matrix = np.empty((n_x, n_y), dtype=object)
     for i in range(n_x):
@@ -36,7 +36,7 @@ def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step):
             # задаем отрицательный раcход в блоках модели, переноcом из экземпляров cкважин
             modelling_matrix[
                 well_matrix[i].n_x_skv, well_matrix[i].n_y_skv
-            ].q = -well_matrix[i].q_skv
+            ].q = well_matrix[i].q_skv
         c_1 = np.zeros(n_x + 1, dtype=float)
         v_1 = np.zeros(n_x + 1, dtype=float)
         # cворачиваем двумерные маccивы концентраций и cкороcтей в одномерные
@@ -59,10 +59,10 @@ def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step):
             # раccчет концентраций на границах блоков по y
             c_05 = edge(c_1, v_1, d_x, d_t, n_y)
             # запиcь концентраций в матрицу блоков
-            for j in range(n_x):
+            for j in range(n_y):
                 modelling_matrix[i, j].c_y = c_05[j]
-        for k in range(1, n_y - 1):
-            for m in range(1, n_x - 1):
+        for k in range(1, n_y - 2):
+            for m in range(1, n_x - 2):
                 modelling_matrix[m, k].c += (
                     d_t
                     / (d_x[m] * d_y[k])
@@ -82,16 +82,11 @@ def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step):
                         )
                     )
                 )
-    # определяем, дошел фронт или нет, если дошел - добавляем 1
+    # определяем, дошел фронт или нет, если дошел - добавляем 1 к значению в блоке
     for i in range(n_x):
         for j in range(n_y):
             if modelling_matrix[i, j].c >= 0.5:
                 modelling_matrix[i, j].migration_front += 1
-    # задание постоянной единицы в блоке скважины
-    for i in range(well_count):
-        modelling_matrix[
-            well_matrix[i].n_x_skv, well_matrix[i].n_y_skv
-        ].migration_front = 1
     # добавляем данные в массив
     data_for_df = []
     for i in range(n_x - 1):
@@ -107,7 +102,8 @@ def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step):
                 ]
             )
     df = pd.DataFrame(
-        data_for_df, columns=["X", "Y", "Concentrations", "Migration_front", "Vx", "Vy"]
+        data_for_df,
+        columns=["X", "Y", "Concentrations", "Migration_front", "Vx", "Vy"],
     )
     # df.to_csv("dataset.csv", index=False)
     return df

@@ -3,9 +3,9 @@ import numpy as np
 
 # рассчет концентраций на границах блоков
 def edge(c_1, v_1, d_x, d_t, n_axis):
-    c_05 = np.zeros(n_axis + 1, dtype=float)
-    r = np.ones(n_axis + 1)  # Инициализируем массив r значениями 1.0
-    f = np.zeros(n_axis + 1)  # Инициализируем массив f значениями 0.0
+    c_05 = np.zeros(n_axis, dtype=float)
+    r = np.ones(n_axis)  # Инициализируем массив r значениями 1.0
+    f = np.zeros(n_axis)  # Инициализируем массив f значениями 0.0
     c_05[0] = c_1[0]
     iapr = 2
     for i in range(1, n_axis - 1):

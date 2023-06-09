@@ -13,8 +13,9 @@ def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
     for i in range(well_count):
         x_1[i] = 0
         y_1[i] = 0
-        n_x_x = n_x_skv[i]
-        n_y_y = n_y_skv[i]
+        # прибавление 1 нужно для захвата непосредственно блока со скважиной
+        n_x_x = n_x_skv[i] + 1
+        n_y_y = n_y_skv[i] + 1
         for j in range(1, n_x_x):
             x_1[i] += (d_x[j - 1] + d_x[j]) / 2
         for j in range(1, n_y_y):
@@ -22,11 +23,10 @@ def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
 
     x_2 = d_x[0] / 2
     y_2 = d_y[0] / 2
-
     for i in range(1, n_y):
         x_2 = d_x[0] / 2
-        y_3 = y_2 + d_y[i]
         for j in range(n_x):
+            y_3 = y_2 + d_y[i]
             for k in range(well_count):
                 y_b = y_3 - y_1[k]
                 y_h = y_2 - y_1[k]
@@ -43,8 +43,8 @@ def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
 
     for i in range(1, n_x):
         y_2 = d_y[0] / 2
-        x_3 = x_2 + d_x[i]
         for j in range(n_y):
+            x_3 = x_2 + d_x[i]
             for k in range(well_count):
                 x_p = x_3 - x_1[k]
                 x_l = x_2 - x_1[k]
