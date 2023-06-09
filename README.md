@@ -7,7 +7,7 @@
 Параметры задаются в app.py и случайно генерируются в start_parameters.py
 
 Пример 1:
-![example_1](https://github.com/SizNi/geol_mod/assets/115162848/2c36c35b-4d67-46c9-bf31-07578204e42a)
+![example_1](example_1(200).png)
 Пример 2:
 ![example_2](https://github.com/SizNi/geol_mod/assets/115162848/3fcf1e88-0e18-46ff-ad32-92228099dd01)
 Пример 3:
