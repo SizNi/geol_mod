@@ -7,12 +7,16 @@
 Параметры задаются в app.py и случайно генерируются в start_parameters.py
 
 Пример 1:
-![example_1](https://github.com/SizNi/geol_mod/assets/115162848/2c36c35b-4d67-46c9-bf31-07578204e42a)
+![example_1(200)](https://github.com/SizNi/geol_mod/assets/115162848/58259d05-f4c4-4014-99ad-3c9e46b05f22)
+
 Пример 2:
-![example_2](https://github.com/SizNi/geol_mod/assets/115162848/3fcf1e88-0e18-46ff-ad32-92228099dd01)
+![example_2(200)](https://github.com/SizNi/geol_mod/assets/115162848/be26b6a4-ca27-41cc-8954-45341d8a6b38)
+
 Пример 3:
-![example_3](https://github.com/SizNi/geol_mod/assets/115162848/b5c191a0-131a-4707-beb2-d9e3d54bfe00)
+![example_3(200)](https://github.com/SizNi/geol_mod/assets/115162848/1b2be698-d906-499e-8a65-cc049f7ea741)
+
 Пример 4:
-![example_4](https://github.com/SizNi/geol_mod/assets/115162848/dd50b4cd-5ebc-46b7-b281-916e16d093cb)
+![example_4(400)](https://github.com/SizNi/geol_mod/assets/115162848/ccaca612-9ffe-4337-8f72-59440ca6a527)
+
 Пример 5:
-![example_5](https://github.com/SizNi/geol_mod/assets/115162848/03c45ca6-fc86-41fb-8ab7-6b7ee13170d9)
+![example_5(400)](https://github.com/SizNi/geol_mod/assets/115162848/91b1fc9d-4d01-4cb4-a8ab-d1730f792520)
