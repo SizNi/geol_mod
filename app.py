@@ -5,12 +5,12 @@ import numpy as np
 from start_parameters import distribution_array
 
 # количество итераций
-iteration_count = 100
+iteration_count = 50
 # размеры модели в блоках
-n_x = n_y = 40
+n_x = n_y = 80
 # координаты скважин
-n_x_skv = np.array([20, 30, 25])
-n_y_skv = np.array([20, 15, 20])
+n_x_skv = np.array([30, 40, 35, 47, 70])
+n_y_skv = np.array([30, 25, 30, 68, 70])
 # размер блока
 b_size = 10.0
 # приращение
@@ -20,12 +20,14 @@ d_y = np.full(n_y, b_size)
 d_t = 1
 # количество временных шагов
 n_step = 200
+# тип распределения параметров
+type = 'normal'
 
 
 def app_start():
     bar_main = tqdm(total=iteration_count, desc="Iteration")
     # формирование массива случайных коэффициентов для задачи параметров
-    d_array = distribution_array(iteration_count, 5)
+    d_array = distribution_array(iteration_count, 5, type)
     # первый вызов функции и получение основного датасета
     main_df = main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, d_array, 0)
     bar_main.update(1)

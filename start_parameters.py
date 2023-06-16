@@ -19,11 +19,21 @@ q_main = 62.8
 
 
 # массив распределния параметров (формируется до запуска повторяющихся циклов)
-def distribution_array(iteration_count, n_par):
+def distribution_array(iteration_count, n_par, type='random'):
     d_array = np.empty((iteration_count, n_par), dtype=float)
     random.seed()
-    d_array = np.random.random((iteration_count, n_par))
-    return d_array
+    # случайное распределение
+    if type == 'random':
+        d_array = np.random.random((iteration_count, n_par))
+    # нормальное распределение для каждого из параметров
+    elif type == 'normal':
+        for i in range(n_par):
+            d_array[:, i] = np.random.normal(size=(iteration_count))
+    # логнормальное распределение
+    elif type == 'lognormal':
+        for i in range(n_par):
+            d_array[:, i] = np.random.lognormal(size=iteration_count)
+    return d_array  
 
 
 # генератор стартовых параметров
