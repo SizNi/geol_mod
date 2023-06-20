@@ -4,7 +4,7 @@
 
 Скорости фильтрации определяются аналитически, массоперенос рассчитывается численно, интерполяция - линейная по методу Кригинга.
 
-Параметры задаются в app.py и случайно генерируются в start_parameters.py
+Параметры задаются в app.py и генерируются по трем распределениям на выбор (случайное, нормальное, логнормальное) в start_parameters.py
 
 Пример 1:
 ![example_1(200)](https://github.com/SizNi/geol_mod/assets/115162848/58259d05-f4c4-4014-99ad-3c9e46b05f22)
@@ -19,4 +19,4 @@
 ![example_4(400)](https://github.com/SizNi/geol_mod/assets/115162848/ccaca612-9ffe-4337-8f72-59440ca6a527)
 
 Пример 5:
-![example_5(400)](https://github.com/SizNi/geol_mod/assets/115162848/91b1fc9d-4d01-4cb4-a8ab-d1730f792520)
+![example_5(lognormal)](https://github.com/SizNi/geol_mod/assets/115162848/040d96ae-1ba2-4d8a-9061-30680693297d)
