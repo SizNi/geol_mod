@@ -17,8 +17,8 @@ def velocity(n_x, n_y, d_x, d_y, modelling_matrix, well_matrix):
         n_x_x = n_x_skv[i] + 1
         n_y_y = n_y_skv[i] + 1
         # заменяем цикл for на векторизацию
-        x_1[i] = np.sum((d_x[1:n_x_x] + d_x[:n_x_x-1]) / 2)
-        y_1[i] = np.sum((d_y[1:n_y_y] + d_y[:n_y_y-1]) / 2)
+        x_1[i] = np.sum((d_x[1:n_x_x] + d_x[: n_x_x - 1]) / 2)
+        y_1[i] = np.sum((d_y[1:n_y_y] + d_y[: n_y_y - 1]) / 2)
 
     x_2 = d_x[0] / 2
     y_2 = d_y[0] / 2
