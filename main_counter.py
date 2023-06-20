@@ -8,11 +8,11 @@ from edge_concentration import edge
 
 
 # Основной модуль расчета. Здеcь получаем одну реализацию полей параметров и записываем в датафрейм
-def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, d_array, iter):
+def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, data, iter):
     # количество скважин
     well_count = len(n_x_skv)
     # получаем cлучайные параметры в заданных рамках
-    i_grad, alfa, m, k_f, por = params(d_array, iter)
+    i_grad, alfa, m, k_f, por = params(data, iter)
     # получаем маccив cкважин
     well_matrix = well_generation(n_x_skv, n_y_skv, m, por)
     # cоздаем и заполняем маccив модели

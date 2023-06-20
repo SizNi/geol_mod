@@ -5,12 +5,12 @@ import numpy as np
 from start_parameters import distribution_array
 
 # количество итераций
-iteration_count = 50
+iteration_count = 100
 # размеры модели в блоках
-n_x = n_y = 80
+n_x = n_y = 40
 # координаты скважин
-n_x_skv = np.array([30, 40, 35, 47, 70])
-n_y_skv = np.array([30, 25, 30, 68, 70])
+n_x_skv = np.array([20, 30, 25])
+n_y_skv = np.array([20, 15, 20])
 # размер блока
 b_size = 10.0
 # приращение
@@ -21,18 +21,18 @@ d_t = 1
 # количество временных шагов
 n_step = 200
 # тип распределения параметров
-type = 'normal'
+type = 'lognormal'
 
 
 def app_start():
     bar_main = tqdm(total=iteration_count, desc="Iteration")
     # формирование массива случайных коэффициентов для задачи параметров
-    d_array = distribution_array(iteration_count, 5, type)
+    data = distribution_array(iteration_count, 5, type)
     # первый вызов функции и получение основного датасета
-    main_df = main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, d_array, 0)
+    main_df = main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, data, 0)
     bar_main.update(1)
     for iter in range(1, iteration_count):
-        new_df = main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, d_array, iter)
+        new_df = main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, data, iter)
         # приращение вероятностей
         main_df.Migration_front += new_df.Migration_front
         bar_main.update(1)
@@ -42,7 +42,7 @@ def app_start():
     # сохраняем датасет на всякий
     main_df.to_csv("main_dataset.csv", index=False)
     # функция-визуализатор
-    front_map(main_df, n_x_skv, n_y_skv, b_size, n_x, n_y)
+    front_map(type, main_df, n_x_skv, n_y_skv, b_size, n_x, n_y)
 
 
 if __name__ == "__main__":

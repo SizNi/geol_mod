@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 
 def front_map(
+    type,
     data=pd.read_csv("main_dataset.csv"),
     n_x_skv=np.array([20, 30, 25]),
     n_y_skv=np.array([20, 15, 20]),
@@ -65,7 +66,7 @@ def front_map(
     # Отображение осей и меток
     plt.xlabel("X")
     plt.ylabel("Y")
-    plt.title("Migration Front Contourmap")
+    plt.title(f"Migration Front Contourmap, {type} distribution.")
     plt.legend()
     # Сохранение графика в файл
     plt.savefig("result.png", dpi=600)
