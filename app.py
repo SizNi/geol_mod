@@ -21,7 +21,7 @@ d_t = 1
 # количество временных шагов
 n_step = 200
 # тип распределения параметров
-type = "normal"
+type = "uniform"
 
 
 def app_start():

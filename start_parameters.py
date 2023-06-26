@@ -94,6 +94,13 @@ def distribution_array(iteration_count, n_par, type="random"):
             size=(iteration_count),
         )
         data_por = np.clip(data_por, por_min, por_max)
+    # равномерное распределение
+    elif type == "uniform":
+        data_igrad = np.random.uniform(low=i_min, high=i_max, size=iteration_count)
+        data_alfa = np.random.uniform(low=alfa_min, high=alfa_max, size=iteration_count)
+        data_m = np.random.uniform(low=m_min, high=m_max, size=iteration_count)
+        data_kf = np.random.uniform(low=k_f_min, high=k_f_max, size=iteration_count)
+        data_por = np.random.uniform(low=por_min, high=por_max, size=iteration_count)
     # запись в датафрейм всех параметров для всех итераций
     data = pd.DataFrame(
         {
