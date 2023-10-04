@@ -5,15 +5,19 @@ from math import pi
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
+# коэффициент фильтрации
 k_f_min = 5.0
 k_f_max = 20.0
+# уклон потока
 i_min = 0.001
 i_max = 0.01
+# направление потока
 alfa_min = 270.0
 alfa_max = 330.0
+# мощность
 m_min = 5.0
 m_max = 10.0
+# пористость
 por_min = 0.2
 por_max = 0.4
 # расход м3/сут
