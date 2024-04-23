@@ -1,27 +1,8 @@
 from main_counter import main
 from map import front_map
 from tqdm import tqdm
-import numpy as np
 from start_parameters import distribution_array
-
-# количество итераций
-iteration_count = 100
-# размеры модели в блоках
-n_x = n_y = 40
-# координаты скважин
-n_x_skv = np.array([20, 30, 25])
-n_y_skv = np.array([20, 15, 20])
-# размер блока
-b_size = 10.0
-# приращение
-d_x = np.full(n_x, b_size)
-d_y = np.full(n_y, b_size)
-# временной шаг
-d_t = 1
-# количество временных шагов
-n_step = 200
-# тип распределения параметров
-type = "random"
+from parameters import iteration_count, n_x, n_y, n_x_skv, n_y_skv, b_size, d_x, d_y, d_t, n_step, type
 
 
 def app_start():

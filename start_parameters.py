@@ -1,27 +1,9 @@
-import random
 from model_class import Well
 import numpy as np
 from math import pi
 import matplotlib.pyplot as plt
 import pandas as pd
-
-# коэффициент фильтрации
-k_f_min = 5.0
-k_f_max = 20.0
-# уклон потока
-i_min = 0.001
-i_max = 0.01
-# направление потока
-alfa_min = 270.0
-alfa_max = 330.0
-# мощность
-m_min = 5.0
-m_max = 10.0
-# пористость
-por_min = 0.2
-por_max = 0.4
-# расход м3/сут
-q_main = 62.8
+from parameters import k_f_min, k_f_max, i_min, i_max, alfa_min, alfa_max, m_min, m_max, por_min, por_max, q_main
 
 
 # массив распределния параметров (формируется до запуска повторяющихся циклов)
@@ -133,6 +115,9 @@ def params(data, iter):
 # генератор массива объектов скважин
 def well_generation(n_x_skv, n_y_skv, m, por):
     # создаем массив скважин
-    q_skv = q_main / (m * por * 2 * pi)
-    well_matrix = [Well(n_x - 1, n_y - 1, q_skv) for n_x, n_y in zip(n_x_skv, n_y_skv)]
+    # q_skv = q_main / (m * por * 2 * pi)
+    well_matrix = [
+        Well(n_x - 1, n_y - 1, q_skv / (m * por * 2 * pi))
+        for n_x, n_y, q_skv in zip(n_x_skv, n_y_skv, q_main)
+    ]
     return np.array(well_matrix)
