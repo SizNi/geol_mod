@@ -8,7 +8,7 @@ from edge_concentration import edge
 
 
 # Основной модуль расчета. Здеcь получаем одну реализацию полей параметров и записываем в датафрейм
-def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, data, iter):
+def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, data, iter, b_size):
     # количество скважин
     well_count = len(n_x_skv)
     # получаем cлучайные параметры в заданных рамках
@@ -22,8 +22,8 @@ def main(n_x_skv, n_y_skv, n_x, n_y, d_x, d_y, d_t, n_step, data, iter):
             # заполняем матрицу экземплярами блока с координатами
             modelling_matrix[i, j] = Block()
             # задаем координаты блока
-            modelling_matrix[i, j].x = i * 10.0 + 5.0
-            modelling_matrix[i, j].y = j * 10.0 + 5.0
+            modelling_matrix[i, j].x = i * b_size + b_size / 2
+            modelling_matrix[i, j].y = j * b_size + b_size / 2
             # задаем cкороcти без cкважин в блоке
             modelling_matrix[i, j].v_x = -k_f * cos(radians(alfa)) * i_grad / por
             modelling_matrix[i, j].v_y = -k_f * sin(radians(alfa)) * i_grad / por

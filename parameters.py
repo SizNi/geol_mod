@@ -1,17 +1,17 @@
 import numpy as np
 
 # number of iteratons
-iteration_count = 100
+iteration_count = 10
 # model size in blocks
-n_x = 40
-n_y = 40
+n_x = 80
+n_y = 80
 # wells coordinates (in blocks, X-Y)
 n_x_skv = np.array([20, 30, 25])
 n_y_skv = np.array([20, 15, 20])
 # wells flow rate
 q_main = np.array([62.1, 20.0, 24.3])
 # block size
-b_size = 10.0
+b_size = 2
 # increment
 d_x = np.full(n_x, b_size)
 d_y = np.full(n_y, b_size)

@@ -4,15 +4,7 @@ from scipy.interpolate import griddata
 import matplotlib.pyplot as plt
 
 
-def front_map(
-    type,
-    data=pd.read_csv("main_dataset.csv"),
-    n_x_skv=np.array([20, 30, 25]),
-    n_y_skv=np.array([20, 15, 20]),
-    b_size=10,
-    n_x=40,
-    n_y=40,
-):
+def front_map(type, n_x_skv, n_y_skv, b_size, n_x, n_y, data):
     # Извлечение координат и значений migration_front
     x = data["X"]
     y = data["Y"]
@@ -49,13 +41,13 @@ def front_map(
 
     # Добавление скважин
     plt.scatter(
-        [((x) * 10 - 5) for x in n_x_skv],
-        [((y) * 10 - 5) for y in n_y_skv],
+        [((x) * b_size - b_size / 2) for x in n_x_skv],
+        [((y) * b_size - b_size / 2) for y in n_y_skv],
         c="red",
         label="Well",
         s=2000 / n_x,
     )
-    # Добавление сетки с шагом 10
+    # Добавление сетки с шагом b_size
     x_ticks = np.arange(0, n_x * b_size + 1, b_size)
     y_ticks = np.arange(0, n_y * b_size + 1, b_size)
     for x_tick in x_ticks:
