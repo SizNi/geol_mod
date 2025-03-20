@@ -4,9 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["SizNi <wwwwwwwww@list.ru>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
-python = "<3.12,>=3.8"
+python = "<3.12,>=3.10"
 matplotlib = "^3.7.1"
 pandas = "^2.0.1"
 black = {extras = ["jupyter"], version = "^23.3.0"}

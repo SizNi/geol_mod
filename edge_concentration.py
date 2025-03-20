@@ -14,7 +14,8 @@ def edge(c_1, v_1, d_x, d_t, n_axis):
         if iapr > 1:
             r1 = c_1[i + 1 - sig] - c_1[i - sig]
             r2 = c_1[i + 1] - c_1[i]
-            if r2 * r1 <= 0.0:
+            # print(r1, r2)
+            if (r1 <= 0.0 and r2 >= 0.0) or (r1 >= 0.0 and r2 <= 0.0):
                 r[i] = 0.0
             else:
                 r[i] = r1 / r2
